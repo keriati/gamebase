@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <style type="text/css">
+        #field {
+            margin: 0 auto;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        #ball {
+            width: 10px;
+            height: 10px;
+            background: black;
+            margin-top: -5px;
+            margin-left: -5px;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="vendor/jquery-1.9.1.js"></script>
+<script src="balls/field.js"></script>
+<script src="balls/gameball.js"></script>
+<script type="text/javascript">
+    (function() {
+
+        var myField = new Field(),
+            myBall = new GameBall();
+
+        myField.$el.appendTo('body')
+        myField.addObject(myBall);
+
+        // Start animation
+        var loop = function() {
+            window.requestAnimationFrame(loop);
+            myField.renderAll();
+        }
+
+        window.requestAnimationFrame(loop);
+    })();
+</script>
+
+
+</body>
+</html>
