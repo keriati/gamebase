@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
     body {
-        font-family: Helvetica, Arial;
+        font-family: Helvetica, Arial, sans-serif;
     }
     #game {
         margin: 0 auto;
@@ -95,14 +95,14 @@
 </div>
 
 <script src="vendor/jquery-1.9.1.js"></script>
+<script src="shooter/game.js"></script>
 <script src="shooter/bullet.js"></script>
 <script src="shooter/enemy.js"></script>
-<script src="shooter/game.js"></script>
 <script src="shooter/player.js"></script>
 
 <script type="text/javascript">
     (function() {
-        var myGame = new Game();
+        var myGame = new Shooter.Game();
 
         $('#start').on('click', function() {
             myGame.pause = false;
