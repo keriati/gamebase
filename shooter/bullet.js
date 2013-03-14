@@ -29,13 +29,13 @@
          *
          * @method render
          */
-        render: function() {
+        render: function(ΔTime) {
             if(this.positionY <= 0) {
                 this.remove = true;
                 return;
             }
 
-            this.positionY -= this.velocityY;
+            this.positionY -= this.velocityY * ΔTime;
 
             this.$el.css({
                 left: this.positionX,

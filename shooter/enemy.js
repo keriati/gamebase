@@ -32,8 +32,8 @@
          *
          * @method render
          */
-        render: function() {
-            this.positionY += this.velocityY;
+        render: function(ΔTime) {
+            this.positionY += this.velocityY * ΔTime;
 
             if(this.positionY >= this.game.height) {
                 this.remove = true;

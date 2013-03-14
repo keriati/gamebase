@@ -23,7 +23,8 @@
         this.velocityXMin = -this.velocityXMax;
         this.velocityIncrease = 0;
 
-        this.render();
+        // ΔTime mocked for render -> 1 -> no adjustment;
+        this.render(1);
 
         /**
          * Assigning events for keyboard.
@@ -69,8 +70,11 @@
          *
          * @method render
          */
-        render: function() {
-            this.velocityX += this.velocityIncrease;
+        render: function(ΔTime) {
+
+            this.velocityX += (this.velocityIncrease);
+            this.velocityX *= ΔTime;  // The best place for this?
+
             this.velocityX = (this.velocityX > this.velocityXMax) ? this.velocityXMax : this.velocityX;
             this.velocityX = (this.velocityX < this.velocityXMin) ? this.velocityXMin : this.velocityX;
 

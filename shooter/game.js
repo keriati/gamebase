@@ -32,23 +32,47 @@
         this.objects = [];
         this.objects.push(this.player);
         this.pause = false;
+        this.lastFrameTime = 0;
+        this.ΔTime = 1;
     }
 
     Game.prototype = {
+        start: function() {
+            var that = this;
+
+            this.pause = false;
+
+            window.requestAnimationFrame(function(nextFrameTime) {
+                that.lastFrameTime = nextFrameTime;
+                that.loop(nextFrameTime);
+            });
+        },
+
+        stop: function() {
+            this.pause = true;
+        },
+
         /**
          * The main loop that triggers the render()
          * functions of all moving objects of the game
          *
          * @method loop
-         * @param timer
+         * @param frameTime Notice: on start at least new Date().getTime() should be passed in.
          */
-        loop: function(timer) {
+        loop: function(frameTime) {
+
+            if(this.lastFrameTime !== 0) {
+                this.ΔTime = Math.abs((this.lastFrameTime - frameTime) / (1000/60));
+            }
+
+            this.lastFrameTime = frameTime;
+
             if(this.pause) {
                 return;
             }
             var that = this;
 
-            window.requestAnimationFrame(function(timer) {that.loop(timer);});
+            window.requestAnimationFrame(function(nextFrameTime) {that.loop(nextFrameTime);});
 
             if(this.rand(1)) {
                 this.objects.push(new Shooter.Enemy(this));
@@ -60,7 +84,7 @@
                 if(object.remove) {
                     that.remove(object);
                 } else {
-                    object.render();
+                    object.render(that.ΔTime);
                 }
             });
         },
