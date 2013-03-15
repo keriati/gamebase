@@ -14,6 +14,8 @@
         this.$el = $('<div class="enemy"></div>');
 
         this.positionX = this.rand();
+        this.originalPositionX = this.positionX;
+
         this.positionY = 0;
 
         this.$el.css({
@@ -34,6 +36,7 @@
          */
         render: function(ΔTime) {
             this.positionY += this.velocityY * ΔTime;
+            this.positionX = this.originalPositionX + (Math.sin(this.positionY / 30) * 15);
 
             if(this.positionY >= this.game.height) {
                 this.remove = true;
@@ -42,7 +45,8 @@
             }
 
             this.$el.css({
-                top: this.positionY
+                top: this.positionY,
+                left: this.positionX
             });
         },
 
